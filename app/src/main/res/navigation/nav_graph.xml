@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.aicleaner.ui.fragments.FragmentMain"
+        tools:layout="@layout/fragment_main">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/appManager"
+        android:name="com.example.aicleaner.ui.fragments.AppManagerFragment"
+        tools:layout="@layout/fragment_app_manager">
+
+    </fragment>
+    <fragment
+        android:id="@+id/photoCleanFragment"
+        android:name="com.example.aicleaner.ui.fragments.PhotoCleanFragment"
+        tools:layout="@layout/photo_clean_layout">
+
+        <action
+            android:id="@+id/action_photoCleanFragment_to_photoDeleteFragment"
+            app:destination="@id/photoDeleteFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/photoDeleteFragment"
+        android:name="com.example.aicleaner.ui.fragments.DeletePhotoFragment"
+        tools:layout="@layout/delete_photo_fragment">
+
+        <argument
+            android:name="path"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="abc" />
+        <argument
+            android:name="foldername"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="abc" />
+        <argument
+            android:name="size"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/videoFragment"
+        android:name="com.example.aicleaner.ui.fragments.VideoFragment"
+        tools:layout="@layout/video_fragment">
+
+    </fragment>
+</navigation>

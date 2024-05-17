@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        app:cardCornerRadius="@dimen/_10sdp"
+        android:layout_margin="@dimen/_10sdp"
+        android:layout_height="wrap_content">
+       <androidx.constraintlayout.widget.ConstraintLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:id="@+id/folderName"
+               android:textSize="@dimen/_14sdp"
+               android:layout_marginTop="@dimen/_20sdp"
+               android:textColor="@color/black"
+               android:layout_marginStart="@dimen/_10sdp"
+               android:text="@string/appManger"
+               android:fontFamily="@font/mons_medium"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               android:layout_height="wrap_content"/>
+           <TextView
+               android:layout_width="wrap_content"
+               android:id="@+id/picCount"
+               android:textSize="@dimen/_12sdp"
+               android:layout_marginTop="@dimen/_5sdp"
+               android:textColor="@color/black"
+               android:layout_marginStart="@dimen/_10sdp"
+               android:text="@string/appManger"
+               android:fontFamily="@font/mons_medium"
+               app:layout_constraintTop_toBottomOf="@+id/folderName"
+               app:layout_constraintStart_toStartOf="parent"
+               android:layout_height="wrap_content"/>
+
+
+           <androidx.cardview.widget.CardView
+               android:layout_width="@dimen/_50sdp"
+               android:layout_marginStart="@dimen/_10sdp"
+               app:layout_constraintBottom_toBottomOf="parent"
+               android:layout_marginBottom="@dimen/_10sdp"
+               app:cardCornerRadius="@dimen/_10sdp"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toBottomOf="@+id/picCount"
+               android:layout_height="@dimen/_50sdp">
+               <ImageView
+                   android:id="@+id/appIcon"
+                   android:src="@drawable/appicon"
+                   android:layout_width="match_parent"
+                   android:scaleType="fitXY"
+                   android:layout_height="match_parent"
+                    />
+           </androidx.cardview.widget.CardView>
+
+           <ImageView
+               android:id="@+id/right"
+               android:src="@drawable/arrow_right"
+               app:layout_constraintTop_toTopOf="@+id/sizeInMb"
+               android:layout_marginEnd="@dimen/_10sdp"
+               app:layout_constraintBottom_toBottomOf="@+id/sizeInMb"
+               app:layout_constraintEnd_toEndOf="parent"
+               android:layout_width="wrap_content"
+               app:layout_constraintVertical_bias="0"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="@dimen/_20sdp"
+               android:layout_marginBottom="@dimen/_10sdp"
+               />
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:id="@+id/sizeInMb"
+               app:layout_constraintTop_toTopOf="@+id/folderName"
+               android:layout_marginEnd="@dimen/_10sdp"
+               app:layout_constraintBottom_toBottomOf="@+id/folderName"
+               android:textSize="@dimen/_12sdp"
+               app:layout_constraintEnd_toStartOf="@+id/right"
+               android:textColor="@android:color/darker_gray"
+               android:layout_marginStart="@dimen/_10sdp"
+               android:text="12"
+               android:fontFamily="@font/mons_medium"
+               android:layout_height="wrap_content"/>
+       </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>

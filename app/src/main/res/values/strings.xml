@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">AICleaner</string>
+    <string name="photoClean">Photo Clean</string>
+    <string name="videoClean">Video Clean</string>
+    <string name="appManger">App Manager</string>
+    <string name="clearCache">Cache Clean</string>
+
+</resources>
