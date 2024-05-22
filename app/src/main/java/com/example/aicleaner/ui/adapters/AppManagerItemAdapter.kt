@@ -35,7 +35,6 @@ class AppManagerItemAdapter(
             binding?.executePendingBindings()
 
         }
-
     }
 
     object LiveSliderAdapterDiffUtilCallback : DiffUtil.ItemCallback<AppManagerModel>() {
