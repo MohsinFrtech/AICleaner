@@ -1,13 +1,12 @@
 package com.example.aicleaner.ui.fragments
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.content.Intent
+import android.os.storage.StorageManager
 import androidx.fragment.app.Fragment
 
-class DeleteVideoFragment:Fragment() {
 
+class DeleteVideoFragment:Fragment() {
+//
 //    override fun onCreateView(
 //        inflater: LayoutInflater,
 //        container: ViewGroup?,
@@ -15,4 +14,7 @@ class DeleteVideoFragment:Fragment() {
 //    ): View? {
 //
 //    }
+
+
+
 }
