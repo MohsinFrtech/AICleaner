@@ -23,6 +23,97 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_weight="70">
 
+            <ImageView
+                android:id="@+id/imgCircle"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="@dimen/_200sdp"
+                android:src="@drawable/circle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="@dimen/_40sdp"></ImageView>
+
+            <TextView
+                android:id="@+id/txtData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5.13"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_40sdp"
+                android:textStyle="normal"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/_110sdp"></TextView>
+
+            <TextView
+                android:id="@+id/txtMB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MB"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_9sdp"
+                android:textStyle="normal"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintStart_toEndOf="@+id/txtData"
+                app:layout_constraintTop_toTopOf="@+id/txtData"></TextView>
+
+            <TextView
+                android:id="@+id/txtDetailData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5.13 can be relesed"
+                app:layout_constraintTop_toBottomOf="@+id/imgCircle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/_10sdp"></TextView>
+
+            <Button
+                android:id="@+id/btnCleanUpSpace"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_26sdp"
+                android:text="clean-up Space"
+                android:textColor="@color/white"
+                android:background="@drawable/button_main"
+                app:layout_constraintTop_toBottomOf="@+id/txtDetailData"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/_10sdp"></Button>
+
+            <TextView
+                android:id="@+id/txtStorageTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone Storage"
+                android:textStyle="normal"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_18sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnCleanUpSpace"></TextView>
+
+            <TextView
+                android:id="@+id/txtAvailableStorage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Available 34.58 GB/128 GB"
+                android:textSize="@dimen/_8sdp"
+                app:layout_constraintTop_toBottomOf="@+id/txtStorageTitle"
+                app:layout_constraintStart_toStartOf="@+id/txtStorageTitle"
+                android:layout_marginTop="@dimen/_2sdp"></TextView>
+
+
+            <ProgressBar
+                android:id="@+id/storageProgressBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:progressDrawable="@drawable/memory_indicator_progress"
+                style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/txtAvailableStorage"/>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

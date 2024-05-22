@@ -13,6 +13,6 @@ class DeleteVideoFragment:Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+            return view
     }
 }

@@ -2,6 +2,8 @@ package com.example.aicleaner.viewmodels
 
 import android.app.Application
 import android.app.RecoverableSecurityException
+import android.app.usage.StorageStats
+import android.app.usage.StorageStatsManager
 import android.content.ContentUris
 import android.content.Context
 import android.content.Intent
@@ -10,8 +12,10 @@ import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
 import android.os.Build
+import android.os.UserHandle
 import android.provider.MediaStore
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -40,6 +44,11 @@ class PhotoCleanViewModel(application: Application) : AndroidViewModel(applicati
         get() = _listOfApps
 
     private val _imagesList = MutableLiveData<List<PictureData>>()
+
+    private val _totalCache = MutableLiveData<String>()
+
+    val totalCache: LiveData<String> get() = _totalCache
+
     val imagesList: LiveData<List<PictureData>>
         get() = _imagesList
     private var pendingDeleteImage: List<PictureData?>? = null
@@ -388,6 +397,7 @@ class PhotoCleanViewModel(application: Application) : AndroidViewModel(applicati
                 val packageName = info.activityInfo.packageName
                 val iconDrawable = info.activityInfo.loadIcon(pm)
                 listApps?.add(AppManagerModel(name, iconDrawable, packageName))
+
             }
             withContext(Dispatchers.Main) {
                 _listOfApps.value = listApps
@@ -395,7 +405,57 @@ class PhotoCleanViewModel(application: Application) : AndroidViewModel(applicati
         }
     }
 
+     fun getSpace(context: Context){
+        viewModelScope.launch {
+            getCache(context)
+        }
+    }
 
+    private suspend fun getCache(context: Context) {
+        withContext(Dispatchers.IO){
+            try {
+                val cacheSizeInBytes = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    getCacheSize(context)
+                } else {
+                    0L // Handle cases for API level below 26 if needed
+                }
+                val cacheSizeInMB = bytesToMB(cacheSizeInBytes)
+                withContext(Dispatchers.Main){
+                    _totalCache.value = cacheSizeInMB.toString()
+                }
+            }
+            catch (e:Exception){
+                Log.d("CacheData",e.message.toString())
+            }
+        }
+    }
+    private fun bytesToMB(bytes: Long): Double {
+        return bytes / (1024.0 * 1024.0)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun getCacheSize(context: Context): Long {
+        var totalCacheSize: Long = 0
+        val storageStatsManager = context.getSystemService(Context.STORAGE_STATS_SERVICE) as StorageStatsManager
+        val packageManager = context.packageManager
+        val apps = packageManager.getInstalledApplications(PackageManager.GET_META_DATA)
+
+        Log.d("Apps",""+apps.size)
+
+        val user = UserHandle.getUserHandleForUid(android.os.Process.myUid())
+
+        apps.forEach { app ->
+            try {
+                val uuid = packageManager.getApplicationInfo(app.packageName, 0).storageUuid
+                val storageStats: StorageStats = storageStatsManager.queryStatsForPackage(uuid, app.packageName, user)
+                totalCacheSize += storageStats.cacheBytes
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        return totalCacheSize
+    }
     fun deleteImage(imageList: List<PictureData?>?) {
         viewModelScope.launch {
             performDeleteImage(imageList)
@@ -407,5 +467,4 @@ class PhotoCleanViewModel(application: Application) : AndroidViewModel(applicati
             getAllAppsPresentInOperatingSystem(context)
         }
     }
-
 }
