@@ -38,7 +38,12 @@ class MainActivity : AppCompatActivity() ,NavController.OnDestinationChangedList
         val appBarConfigurationList = AppBarConfiguration(
             setOf(
                 R.id.mainFragment,
-                R.id.appManager
+                R.id.appManager,
+                R.id.photoCleanFragment,
+                R.id.cacheCleanFragment,
+                R.id.videoFragment,
+                R.id.videoDeleteFragment,
+                R.id.photoDeleteFragment
 
             )
         )

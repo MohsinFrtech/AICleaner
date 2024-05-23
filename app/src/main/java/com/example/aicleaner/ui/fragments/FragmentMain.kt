@@ -55,9 +55,11 @@ class FragmentMain : Fragment() {
            findNavController().navigate(R.id.photoCleanFragment)
         }
 
+        bindingMain?.cacheClean?.setOnClickListener {
+            findNavController().navigate(R.id.cacheCleanFragment)
+        }
 
-
-        requireActivity().startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
+//        requireActivity().startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
 
 
         calculateStorage()

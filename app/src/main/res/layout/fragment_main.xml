@@ -31,7 +31,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="@dimen/_40sdp"></ImageView>
+                android:layout_marginTop="@dimen/_40sdp">
+
+            </ImageView>
 
             <TextView
                 android:id="@+id/txtData"
@@ -44,7 +46,9 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="@dimen/_110sdp"></TextView>
+                android:layout_marginTop="@dimen/_110sdp">
+
+            </TextView>
 
             <TextView
                 android:id="@+id/txtMB"

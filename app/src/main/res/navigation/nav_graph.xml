@@ -12,7 +12,12 @@
         tools:layout="@layout/fragment_main">
 
     </fragment>
+    <fragment
+        android:id="@+id/cacheCleanFragment"
+        android:name="com.example.aicleaner.ui.fragments.CacheCleanFragment"
+        tools:layout="@layout/cache_clean_fragment">
 
+    </fragment>
     <fragment
         android:id="@+id/appManager"
         android:name="com.example.aicleaner.ui.fragments.AppManagerFragment"
@@ -56,5 +61,30 @@
         android:name="com.example.aicleaner.ui.fragments.VideoFragment"
         tools:layout="@layout/video_fragment">
 
+        <action
+            android:id="@+id/action_videoFragment_to_videoDeleteFragment"
+            app:destination="@id/videoDeleteFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/videoDeleteFragment"
+        android:name="com.example.aicleaner.ui.fragments.DeleteVideoFragment"
+        tools:layout="@layout/delete_video_fragment">
+
+        <argument
+            android:name="folderPath"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="abc" />
+        <argument
+            android:name="folderName"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="acd" />
+        <argument
+            android:name="folderSize"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="sdc" />
     </fragment>
 </navigation>

@@ -50,6 +50,7 @@ class DeletePhotoFragment : Fragment(), PhotoClicked {
     ): View? {
         val deleteLay = inflater.inflate(R.layout.delete_photo_fragment, container, false)
         bindingDelete = DataBindingUtil.bind(deleteLay)
+        bindingDelete?.lifecycleOwner=this
         imageCount = 0
         totalSize = BigDecimal(0.0)
         getNavArgs()
@@ -170,12 +171,24 @@ class DeletePhotoFragment : Fragment(), PhotoClicked {
         if (photoData?.size != null) {
             bindingDelete?.sizeMb?.text = photoData?.size + "MB"
         }
+
         getAllImagesInParticularFolder(folderPath)
 
     }
 
     private fun getAllImagesInParticularFolder(folderPath: String) {
         photoCleanViewModel?.getAllImagesOfFolder(requireContext(), folderPath)
+        photoCleanViewModel?.isLoading?.observe(viewLifecycleOwner, Observer {
+            if (it){
+                bindingDelete?.photoCollectionRecycler?.visibility=View.GONE
+                bindingDelete?.lottiePlayer?.visibility=View.VISIBLE
+            }
+            else
+            {
+                bindingDelete?.photoCollectionRecycler?.visibility=View.VISIBLE
+                bindingDelete?.lottiePlayer?.visibility=View.GONE
+            }
+        })
         photoCleanViewModel?.imagesList?.observe(viewLifecycleOwner, Observer {
             if (!it.isNullOrEmpty()) {
                 setUpImagesAdapter(it)
@@ -233,7 +246,7 @@ class DeletePhotoFragment : Fragment(), PhotoClicked {
                 totalSize = totalSize.plus(fileSize)
             } else {
                 if (totalSize > compare) {
-                    if (totalSize > fileSize) {
+                    if (totalSize >= fileSize) {
                         totalSize = totalSize.minus(fileSize)
                     }
                 }

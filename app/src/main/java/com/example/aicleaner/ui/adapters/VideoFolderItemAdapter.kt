@@ -18,6 +18,7 @@ import com.example.aicleaner.databinding.PhotoItemLayoutBinding
 import com.example.aicleaner.models.ImageFolder
 import com.example.aicleaner.models.VideoFolder
 import com.example.aicleaner.ui.fragments.PhotoCleanFragmentDirections
+import com.example.aicleaner.ui.fragments.VideoFragmentDirections
 import com.example.aicleaner.utils.interfaces.NavigateData
 
 
@@ -25,12 +26,12 @@ class VideoFolderItemAdapter(
     val context: Context,
     private val navigateData: NavigateData
 ) :
-    ListAdapter<VideoFolder, VideoFolderItemAdapter.LiveSliderAdapterViewHolder>(
+    ListAdapter<VideoFolder, VideoFolderItemAdapter.VideoViewHolder>(
         LiveSliderAdapterDiffUtilCallback
     ) {
 
 
-    class LiveSliderAdapterViewHolder(
+    class VideoViewHolder(
         private var binding: PhotoItemLayoutBinding,
         private var context: Context
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -68,23 +69,23 @@ class VideoFolderItemAdapter(
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LiveSliderAdapterViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoViewHolder {
         val binding: PhotoItemLayoutBinding = DataBindingUtil.inflate(
             LayoutInflater.from(context), R.layout.photo_item_layout, parent, false
         )
-        return LiveSliderAdapterViewHolder(binding, context)
+        return VideoViewHolder(binding, context)
     }
 
-    override fun onBindViewHolder(holder: LiveSliderAdapterViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: VideoViewHolder, position: Int) {
         holder.bindSeriesData(currentList[position])
         holder.itemView.setOnClickListener {
-//            val direction =
-//                PhotoCleanFragmentDirections.actionPhotoCleanFragmentToPhotoDeleteFragment(
-//                    currentList[position].path,
-//                    currentList[position].folderName,
-//                    currentList[position].folderSize.toString()
-//                )
-//            navigateData.navigation(direction)
+            val direction =
+                VideoFragmentDirections.actionVideoFragmentToVideoDeleteFragment(
+                    currentList[position].path,
+                    currentList[position].videoFolderName,
+                    currentList[position].videoFolderSize.toString()
+                )
+            navigateData.navigation(direction)
         }
 
     }

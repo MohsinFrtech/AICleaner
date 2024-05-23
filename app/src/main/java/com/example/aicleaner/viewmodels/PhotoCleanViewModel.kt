@@ -44,6 +44,7 @@ class PhotoCleanViewModel(application: Application) : AndroidViewModel(applicati
         get() = _listOfApps
 
     private val _imagesList = MutableLiveData<List<PictureData>>()
+    val isLoading = MutableLiveData<Boolean>()
 
     private val _totalCache = MutableLiveData<String>()
 
@@ -52,6 +53,9 @@ class PhotoCleanViewModel(application: Application) : AndroidViewModel(applicati
     val imagesList: LiveData<List<PictureData>>
         get() = _imagesList
     private var pendingDeleteImage: List<PictureData?>? = null
+    init {
+        isLoading.value=false
+    }
 
     private val _permissionNeededForDelete = MutableLiveData<IntentSender?>()
     val permissionNeededForDelete: LiveData<IntentSender?> = _permissionNeededForDelete
@@ -164,6 +168,8 @@ class PhotoCleanViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     fun getAllImagesOfFolder(context: Context, folderPath: String) {
+        isLoading.value=true
+
         coroutineScope.launch {
             val imagesArray = ArrayList<PictureData>()
 
@@ -188,7 +194,9 @@ class PhotoCleanViewModel(application: Application) : AndroidViewModel(applicati
                     if (cursorObj != null) {
                         cursorObj.moveToFirst()
                     } else {
-
+                        withContext(Dispatchers.Main) {
+                            isLoading.value = false
+                        }
                     }
                     if (cursorObj != null) {
 
@@ -216,6 +224,7 @@ class PhotoCleanViewModel(application: Application) : AndroidViewModel(applicati
 
                         withContext(Dispatchers.Main) {
                             _imagesList.value = imagesArray
+                            isLoading.value=false
                         }
 
                         cursorObj?.close()
@@ -223,6 +232,7 @@ class PhotoCleanViewModel(application: Application) : AndroidViewModel(applicati
 
                         withContext(Dispatchers.Main) {
                             _imagesList.value = imagesArray
+                            isLoading.value=false
                         }
                         cursorObj?.close()
                     }
@@ -231,6 +241,7 @@ class PhotoCleanViewModel(application: Application) : AndroidViewModel(applicati
                 } catch (e: Exception) {
                     withContext(Dispatchers.Main) {
                         _imagesList.value = imagesArray
+                        isLoading.value=false
                     }
                     cursorObj?.close()
                     Log.d("ExceptionIn", "msg" + e.message)

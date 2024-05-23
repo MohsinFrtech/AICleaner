@@ -102,6 +102,7 @@
             android:id="@+id/photoCollectionRecycler"
             android:layout_width="match_parent"
             android:layout_height="0sp"
+            android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintBottom_toTopOf="@+id/bottomLay"
             app:layout_constraintEnd_toEndOf="parent"

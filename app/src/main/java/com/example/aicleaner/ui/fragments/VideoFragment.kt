@@ -47,6 +47,9 @@ class VideoFragment:Fragment(),NavigateData {
         videoCleanViewModel?.getAllVideosFromGalleryWithFolders(requireContext())
         videoCleanViewModel?.videoFoldersList?.observe(viewLifecycleOwner, Observer {
             if (!it.isNullOrEmpty()){
+                it.forEach {
+                    Log.d("VideoFolderPaths","path"+it?.path)
+                }
                 setAdapter(it)
             }
         })
@@ -63,6 +66,6 @@ class VideoFragment:Fragment(),NavigateData {
     }
 
     override fun navigation(viewId: NavDirections) {
-
+      findNavController().navigate(viewId)
     }
 }
