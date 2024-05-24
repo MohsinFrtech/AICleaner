@@ -39,14 +39,11 @@ class MainActivity : AppCompatActivity() ,NavController.OnDestinationChangedList
             setOf(
                 R.id.mainFragment,
                 R.id.appManager
-
             )
         )
         setupActionBarWithNavController(navController!!,appBarConfigurationList)
         navController!!.addOnDestinationChangedListener(this)
     }
-
-
     override fun onDestinationChanged(
         controller: NavController,
         destination: NavDestination,
